@@ -1,0 +1,28 @@
+.jumbotron{
+    width: 100%;
+    overflow: hidden;
+}
+.centrado{
+    position: relative;
+    top: 35%;
+    left: 30%;
+}
+
+.image-example{
+    text-align: center;
+}
+
+.circle{
+    width: 150px;
+    height: 150px;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    margin: 0 auto;
+}
+
+.btn-start{
+    position: relative;
+    top: -50%;
+    left: 50%;
+}
