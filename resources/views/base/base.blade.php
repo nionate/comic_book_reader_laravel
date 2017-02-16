@@ -29,8 +29,8 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>{!! link_to('/', 'Portada') !!}</li>
-                <li>{!! link_to('/', 'Comics') !!}</li>
-                <li>{!! link_to('/', 'Subir comic') !!}</li>
+                <li>{!! link_to('/comic', 'Comics') !!}</li>
+                <li>{!! link_to('/comic/nuevo', 'Subir comic') !!}</li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

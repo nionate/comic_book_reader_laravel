@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 Auth::routes();
 
+Route::get('/comic', 'ComicController@index');
 Route::get('/home', 'HomeController@index');
