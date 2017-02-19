@@ -6,8 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{!! URL::asset('css/bootstrap.css') !!}">
+    <link rel="stylesheet" href="{!! URL::asset('css/style.css') !!}">
 
     <title>Comic Book Reader - @yield('title')</title>
 </head>
@@ -30,7 +30,7 @@
             <ul class="nav navbar-nav">
                 <li>{!! link_to('/', 'Portada') !!}</li>
                 <li>{!! link_to('/comic', 'Comics') !!}</li>
-                <li>{!! link_to('/comic/nuevo', 'Subir comic') !!}</li>
+                <li>{!! link_to('/comic/new', 'Subir comic') !!}</li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
