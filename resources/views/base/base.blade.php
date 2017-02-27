@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="{!! URL::asset('css/bootstrap.css') !!}">
     <link rel="stylesheet" href="{!! URL::asset('css/style.css') !!}">
+    <link rel="stylesheet" href="{!! URL::asset('css/font-awesome.css') !!}">
+    <link rel="stylesheet" href="{!! URL::asset('css/iziToast.min.css') !!}">
 
     <title>Comic Book Reader - @yield('title')</title>
 </head>
@@ -28,16 +30,16 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li>{!! link_to('/', 'Portada') !!}</li>
-                <li>{!! link_to('/comic', 'Comics') !!}</li>
-                <li>{!! link_to('/comic/new', 'Subir comic') !!}</li>
+                <li>{!! Html::decode(link_to('/', '<i class="fa fa-home" aria-hidden="true"></i> Portada')) !!}</li>
+                <li>{!! Html::decode(link_to('/comic', '<i class="fa fa-book" aria-hidden="true"></i> Comics')) !!}</li>
+                <li>{!! Html::decode(link_to('/comic/new', '<i class="fa fa-upload" aria-hidden="true"></i> Subir comic')) !!}</li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                    <li><a href="{{ route('register') }}">Register</a></li>
+                    <li><a href="{{ route('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+                    <li><a href="{{ route('register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -49,7 +51,7 @@
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    Logout
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -73,6 +75,12 @@
 </div>
 
 <!-- Scripts -->
-<script src="/js/app.js"></script>
+<script src="{!! URL::asset('js/app.js') !!}"></script>
+<script src="{!! URL::asset('js/bootbox.min.js') !!}"></script>
+<script src="{!! URL::asset('js/jquery.min.js') !!}"></script>
+<script src="{!! URL::asset('js/iziToast.min.js') !!}"></script>
+
+@yield('scripts')
+
 </body>
 </html>

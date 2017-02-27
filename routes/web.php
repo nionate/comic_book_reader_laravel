@@ -17,7 +17,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/comic', 'ComicController@index');
-Route::get('/comic/read/{id}', 'ComicController@read');
+//Route::get('/comic/read/{id}', 'ComicController@read');
+Route::get('/comic/read/{id_comic}/page/{id_page}', 'ComicController@page');
 
 //Grupo de rutas a las que se le aplica el middleware de auth
 Route::group(['middleware' => 'auth'], function () {
@@ -27,7 +28,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/comic/update/{id}', 'ComicController@update')->name('comic.update');
     Route::post('/comic/delete/{id}', 'ComicController@delete')->name('comic.delete');
 });
-
-
 
 Route::get('/home', 'HomeController@index');

@@ -29,3 +29,20 @@
 .container{
     margin-top: 30px;
 }
+
+.img_portada{
+    max-width: 150px;
+}
+
+.img_libro{
+    max-width: 80%;
+}
+
+#control-container{
+    height: 80px;
+    line-height: 80px;
+}
+
+.vertical-btn{
+    vertical-align: middle;
+}

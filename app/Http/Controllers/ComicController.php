@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Comic;
+use Chumper\Zipper\Zipper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ComicController extends Controller
 {
@@ -35,9 +37,20 @@ class ComicController extends Controller
         $comic->serie = $request->serie;
         $comic->idioma = $request->idioma;
         $comic->id_editorial = $request->id_editorial;
-        $comic->img_portada = $request->file('img_portada')->store('img_comic/'.$comic->titulo.''.$comic->numero);
+
+        $img_path = $request->file('img_portada')->store('public/portadas/'.$comic->titulo.''.$comic->numero);
+
+        $comic->img_portada = str_replace("public/", "", $img_path);
 
         $comic->save();
+
+        //archivo zip
+        $zip_path = 'public/libros/'.$comic->id;
+        $zip_name = $comic->titulo.''.$comic->numero.'.zip';
+        $request->file('archivo_zip')->storeAs($zip_path, $zip_name);
+        $zipper = new Zipper();
+        $zipper->make('storage/libros/'.$comic->id.'/'.$zip_name)->extractTo('storage/libros/'.$comic->id);
+
         return back();
     }
 
@@ -68,5 +81,79 @@ class ComicController extends Controller
         return back();
     }
 
+    public function read($id)
+    {
+        $comic = Comic::find($id);
+        $files = File::allFiles('storage/libros/'.$comic->id);
+        $imagenes = [];
+        foreach ($files as $file){
+            $info = pathinfo($file);
+            if ($info['extension'] == 'jpg' || $info['extension'] == 'png'){
+                $imagenes[] = $info['dirname'].'/'.$info['basename'];
+            }
+        }
 
+        sort($imagenes, SORT_NATURAL);
+
+        $paginas = [];
+        for($i = 0; $i < $comic->nro_paginas; $i++)
+        {
+            $paginas[$i+1] = $i+1;
+        }
+
+        $previa = 1;
+        $siguiente = 2;
+
+        return view('comic.read', [
+            'comic' => $comic,
+            'imagen' => $imagenes[0],
+            'paginas' => $paginas,
+            'seleccionada' => 1,
+            'previa' => $previa,
+            'siguiente' => $siguiente]);
+    }
+
+    public function page($id_comic, $id_page)
+    {
+        $comic = Comic::find($id_comic);
+        $files = File::allFiles('storage/libros/'.$comic->id);
+        $imagen = '';
+        foreach ($files as $file){
+            $info = pathinfo($file);
+
+            if ($info['filename'] == $id_page  && ($info['extension'] == 'jpg' || $info['extension'] == 'png')){
+                $imagen = $info['dirname'].'/'.$info['basename'];
+                break;
+            }
+        }
+
+        $paginas = [];
+        for($i = 0; $i < $comic->nro_paginas; $i++)
+        {
+            $paginas[$i+1] = $i+1;
+        }
+
+        $seleccionada = $id_page;
+
+        if($id_page-1 > 1)
+            $previa = $id_page-1;
+        else
+            $previa = 1;
+
+        if($id_page+1 <= $comic->nro_paginas)
+            $siguiente = $id_page+1;
+        else
+            $siguiente = $id_page;
+
+
+
+        return view('comic.read', [
+            'comic' => $comic,
+            'imagen' => $imagen,
+            'paginas' => $paginas,
+            'seleccionada' => $seleccionada,
+            'previa' => $previa,
+            'siguiente' => $siguiente
+        ]);
+    }
 }
