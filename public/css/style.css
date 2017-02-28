@@ -46,3 +46,44 @@
 .vertical-btn{
     vertical-align: middle;
 }
+
+.navbar-default{
+    background-color: #158CBA;
+    border-color: #127398;
+}
+
+.navbar-default .navbar-brand{
+    color: #f2f2f2;
+}
+
+.navbar-default .navbar-nav > li > a{
+    color: #f2f2f2;
+}
+
+.navbar-default .navbar-nav > li > a:hover{
+    color: #ffffff;
+}
+.user_avatar_profile{
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+
+}
+
+.user_avatar_navbar{
+    width: 30px;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.user_details{
+    text-align: center;
+    padding:5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+    margin: 10px;
+}

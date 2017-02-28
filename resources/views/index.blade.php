@@ -3,6 +3,7 @@
 @section('title', 'Inicio')
 
 @section('portada')
+
     <div class="jumbotron" style="height: 500px;">
         {!! link_to('/', 'Comenzar a leer', ['class' => 'btn btn-primary btn-start']) !!}
         {!! Html::image('img/mock.png', '', ['class' => 'centrado']) !!}
