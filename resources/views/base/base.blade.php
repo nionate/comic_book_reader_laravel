@@ -6,10 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <meta name="theme-color" content="#158CBA">
+
     <link rel="stylesheet" href="{!! URL::asset('css/bootstrap.css') !!}">
     <link rel="stylesheet" href="{!! URL::asset('css/style.css') !!}">
     <link rel="stylesheet" href="{!! URL::asset('css/font-awesome.css') !!}">
     <link rel="stylesheet" href="{!! URL::asset('css/iziToast.min.css') !!}">
+    <link rel="stylesheet" href="{!! URL::asset('css/bootstrap-select.min.css') !!}">
 
     <title>Comic Book Reader - @yield('title')</title>
 </head>

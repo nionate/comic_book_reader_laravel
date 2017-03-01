@@ -13,6 +13,41 @@
     </div>
 
     <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-info-circle"></i> Información</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <span class="label label-primary">Editorial</span>
+                            {!! $comic->editorial->nombre !!}
+                        </div>
+                        <div class="col-md-4">
+                            <span class="label label-primary">Géneros</span>
+                            @if(isset($comic->genres))
+                                @foreach($comic->genres as $genre)
+                                    {!! $genre->nombre.',' !!}
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="col-md-4">
+                            <span class="label label-primary">Autores</span>
+                            @if(isset($comic->authors))
+                                @foreach($comic->authors as $author)
+                                    {!! $author->nombres.' '.$author->apellidos.',' !!}
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-12" style="margin-bottom: 10px;">
             <div class="col-md-12">
 
@@ -21,13 +56,12 @@
                     {!! Form::select('size', $paginas, $seleccionada, ['class' => 'form-control', 'id' => 'control-paginas', 'onChange' => 'change_page()']) !!}
 
                     <script>
-                        function change_page()
-                        {
+                        function change_page() {
                             var control = document.getElementById('control-paginas');
                             var new_page = control.value;
                             var old_url = location.href;
                             var url_split = old_url.split('/');
-                            url_split[ url_split.length-1] = new_page;
+                            url_split[url_split.length - 1] = new_page;
                             var new_url = url_split.join('/');
                             location.href = new_url;
                         }
@@ -38,10 +72,10 @@
                 <div id="control-container" class="col-md-4">
                     {!! Html::decode(link_to('/comic/read/'.$comic->id.'/page/'.$previa, '<i class="fa fa-arrow-left" aria-hidden="true"></i>', ['class' => 'vertical-btn btn btn-primary'])) !!}
                     {!! Html::decode(link_to('/comic/read/'.$comic->id.'/page/'.$siguiente, '<i class="fa fa-arrow-right" aria-hidden="true"></i>', ['class' => 'vertical-btn btn btn-primary'])) !!}
-                  {{--  <a href="{{ $comic->id.'/page/'.$previa }}" class="vertical-btn btn btn-primary"><i
-                                class="fa fa-arrow-left" aria-hidden="true"></i></a>
-                    <a href="{{ $comic->id.'/page/'.$siguiente }}" class="vertical-btn btn btn-primary"><i
-                                class="fa fa-arrow-right" aria-hidden="true"></i></a>--}}
+                    {{--  <a href="{{ $comic->id.'/page/'.$previa }}" class="vertical-btn btn btn-primary"><i
+                                  class="fa fa-arrow-left" aria-hidden="true"></i></a>
+                      <a href="{{ $comic->id.'/page/'.$siguiente }}" class="vertical-btn btn btn-primary"><i
+                                  class="fa fa-arrow-right" aria-hidden="true"></i></a>--}}
                 </div>
             </div>
         </div>

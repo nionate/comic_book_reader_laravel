@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Author;
 use App\Comic;
+use App\Editorial;
+use App\Genre;
 use Chumper\Zipper\Zipper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -24,7 +27,25 @@ class ComicController extends Controller
     public function create()
     {
         $comic = new Comic();
-        return view('comic.create', ['comic' => $comic]);
+        $editoriales = Editorial::all();
+        $generos = Genre::all();
+        $autores = Author::all();
+
+        $editoriales_ = [];
+        $generos_ = [];
+        $autores_ = [];
+
+        foreach ($editoriales as $editorial){
+            $editoriales_[$editorial->id] = $editorial->nombre;
+        }
+        foreach ($generos as $genero){
+            $generos_[$genero->id] = $genero->nombre;
+        }
+        foreach ($autores as $autor){
+            $autores_[$autor->id] = $autor->nombres.' '.$autor->apellidos;
+        }
+
+        return view('comic.create', ['comic' => $comic, 'editoriales' => $editoriales_, 'generos' => $generos_, 'autores' => $autores_]);
     }
 
     public function store(Request $request)
@@ -43,6 +64,9 @@ class ComicController extends Controller
         $comic->img_portada = str_replace("public/", "", $img_path);
 
         $comic->save();
+
+        $comic->genres()->attach($request->id_genero);
+        $comic->authors()->attach($request->id_autor);
 
         //archivo zip
         $zip_path = 'public/libros/'.$comic->id;
