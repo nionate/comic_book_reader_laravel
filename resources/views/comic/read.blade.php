@@ -2,7 +2,7 @@
 
 @section('title', $comic->titulo.' #'.$comic->numero)
 
-@section('content')
+@section('comic')
 
     <div class="row">
         <div class="col-md-12">
@@ -79,8 +79,53 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 text-center">
+        <div class="col-md-12">
             {!! Html::image(asset($imagen), '', ['class' => 'img_libro']) !!}
+        </div>
+    </div>
+@endsection
+
+@section('comentarios')
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h2>Comentarios</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {!! Form::model($comentario, ['route' => ['comment.store']]) !!}
+
+            {!! Form::textarea('mensaje', '', ['class' => 'form-control', 'rows'=>'5']) !!}
+            {!! Form::hidden('comic', $comic->id) !!}
+            {!! Form::submit('Comentar', ['class' => 'btn btn-primary', 'style' => 'width:100%;']) !!}
+
+            {!! Form::close() !!}
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-12">
+            @if(!$comic->comentarios->isEmpty())
+                @foreach($comic->comentarios->reverse() as $comentario)
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Por : {!! $comentario->user->name !!}
+                                <small class="pull-right">Fecha: {!! $comentario->fecha !!}</small>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            {!! $comentario->mensaje !!}
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <div class="no-comments text-center">
+                    No existen comentarios todavía
+                </div>
+            @endif
         </div>
     </div>
 @endsection

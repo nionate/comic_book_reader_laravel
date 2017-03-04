@@ -35,7 +35,7 @@
 }
 
 .img_libro{
-    max-width: 80%;
+    max-width: 100%;
 }
 
 #control-container{
@@ -86,4 +86,9 @@
     padding:5px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.35);
     margin: 10px;
+}
+
+.no-comments{
+    color: #999999;
+    font-size: large;
 }

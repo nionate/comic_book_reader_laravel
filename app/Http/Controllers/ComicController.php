@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Author;
 use App\Comic;
+use App\Comment;
 use App\Editorial;
 use App\Genre;
 use Chumper\Zipper\Zipper;
@@ -139,6 +140,7 @@ class ComicController extends Controller
 
     public function page($id_comic, $id_page)
     {
+        $comentario = new Comment();
         $comic = Comic::find($id_comic);
         $files = File::allFiles('storage/libros/'.$comic->id);
         $imagen = '';
@@ -177,7 +179,8 @@ class ComicController extends Controller
             'paginas' => $paginas,
             'seleccionada' => $seleccionada,
             'previa' => $previa,
-            'siguiente' => $siguiente
+            'siguiente' => $siguiente,
+            'comentario' => $comentario
         ]);
     }
 }

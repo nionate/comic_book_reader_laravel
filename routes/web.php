@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/comments/{id}', 'UserController@comments')->name('user.comments');
     Route::get('/user/readings/{id}', 'UserController@readings')->name('user.readings');
     Route::get('/user/activity/{id}', 'UserController@activity')->name('user.activity');
+
+    Route::post('/comments/new', 'CommentController@store')->name('comment.store');
 });
 
 Route::get('/home', 'HomeController@index');

@@ -80,8 +80,20 @@
 <div id="portada">
     @yield('portada')
 </div>
-<div class="container">
-    @yield('content')
+<div class="main">
+    <div class="container">
+        @yield('content')
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-md-8">
+            @yield('comic')
+        </div>
+
+        <div class="col-md-4">
+            @yield('comentarios')
+        </div>
+    </div>
 </div>
 
 <!-- Scripts -->

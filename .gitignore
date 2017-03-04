@@ -10,4 +10,6 @@ Homestead.yaml
 
 modelo.mwb
 modelo.png
-
+modelo.mwb.bak
+respaldo_bd.sql
+.gitignore

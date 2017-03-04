@@ -21,4 +21,9 @@ class Comic extends Model
     {
         return $this->belongsTo('App\Editorial', 'id_editorial');
     }
+
+    public function comentarios()
+    {
+        return $this->hasMany('App\Comment', 'id_comic');
+    }
 }
